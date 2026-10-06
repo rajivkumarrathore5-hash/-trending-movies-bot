@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 750" width="500" height="750">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#182032"/>
+      <stop offset="50%" stop-color="#111624"/>
+      <stop offset="100%" stop-color="#090c14"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e50914"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="40%" r="45%">
+      <stop offset="0%" stop-color="#e50914" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#e50914" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Radial Glow in Center -->
+  <circle cx="250" cy="320" r="220" fill="url(#glowGrad)"/>
+
+  <!-- Border Outline -->
+  <rect x="15" y="15" width="470" height="720" rx="16" fill="none" stroke="#252f48" stroke-width="2" stroke-dasharray="8 6" opacity="0.6"/>
+
+  <!-- Film / Clapperboard Icon Circle -->
+  <g filter="url(#shadow)">
+    <circle cx="250" cy="320" r="70" fill="#1b2438" stroke="#334155" stroke-width="2"/>
+    <circle cx="250" cy="320" r="60" fill="url(#accentGrad)" opacity="0.12"/>
+    
+    <!-- Movie Clapperboard Icon -->
+    <path d="M225 295 L275 295 C280 295 284 299 284 304 L284 340 C284 345 280 349 275 349 L225 349 C220 349 216 345 216 340 L216 304 C216 299 220 295 225 295 Z" fill="#e2e8f0" opacity="0.9"/>
+    <!-- Top Clapper Slats -->
+    <path d="M216 307 L284 307" stroke="#090c14" stroke-width="3"/>
+    <path d="M232 295 L224 307" stroke="#090c14" stroke-width="3"/>
+    <path d="M248 295 L240 307" stroke="#090c14" stroke-width="3"/>
+    <path d="M264 295 L256 307" stroke="#090c14" stroke-width="3"/>
+    <path d="M280 295 L272 307" stroke="#090c14" stroke-width="3"/>
+    <!-- Play Triangle -->
+    <polygon points="245,318 245,338 261,328" fill="#e50914"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="250" y="440" text-anchor="middle" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', sans-serif" font-size="22" font-weight="700" letter-spacing="0.5">
+    NO POSTER
+  </text>
+  <text x="250" y="468" text-anchor="middle" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', sans-serif" font-size="15" font-weight="500" letter-spacing="1.5">
+    AVAILABLE
+  </text>
+
+  <!-- Bottom Brand Mark -->
+  <text x="250" y="680" text-anchor="middle" fill="#475569" font-family="-apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', sans-serif" font-size="13" font-weight="600" letter-spacing="2">
+    CINEPULSE
+  </text>
+</svg>

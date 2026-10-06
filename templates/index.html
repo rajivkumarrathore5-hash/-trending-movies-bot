@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinePulse | Trending Movies, TV Shows &amp; Web Series on OTT</title>
+    <meta name="description" content="CinePulse tracks Top 10 in India, trending movies, TV shows, web series, anime and free movies across Netflix, Prime Video, Hotstar and Zee5.">
+    <meta name="theme-color" content="#121212">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body data-page="{{ active_page }}">
+
+    <!-- Glassmorphism sticky navbar -->
+    <header class="navbar" id="navbar">
+        <div class="nav-inner">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a class="brand" href="/" aria-label="CinePulse home">CINE<span>PULSE</span></a>
+
+            <nav class="nav-links" id="nav-links" aria-label="Primary">
+                {% for slug, (label, path) in pages.items() %}
+                <a href="{{ path }}" class="nav-link {% if slug == active_page %}active{% endif %}" id="nav-{{ slug }}">{{ label }}</a>
+                {% endfor %}
+                <a href="https://kids-shorts-factory.vercel.app" target="_blank" rel="noopener" class="nav-link nav-promo-link" title="Visit KidsShortFactory">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> KidsShortFactory
+                </a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="search-box" id="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="search" id="search-input" placeholder="Search..." autocomplete="off" aria-label="Search movies and shows">
+                    <button class="clear-search-btn" id="clear-search-btn" aria-label="Clear search" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                {% if is_demo_mode %}<span class="demo-badge" title="Add TMDB_API_KEY in config.py for live data">Demo</span>{% endif %}
+                <button class="creator-badge-btn" id="btn-creator" title="Creator &amp; Lead Developer: Rajiv Kumar">
+                    <i class="fa-solid fa-code"></i>
+                    <span>Created by <strong>Rajiv Kumar</strong></span>
+                </button>
+                <button class="icon-btn btn-refresh" id="btn-refresh" title="Sync latest data" aria-label="Sync latest data">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero banner (top 3 trending, auto-slider) -->
+    <section class="hero-spotlight" id="hero-spotlight" aria-label="Featured trending titles">
+        <div class="hero-backdrop-layer hero-backdrop-1 active" id="hero-backdrop-1"></div>
+        <div class="hero-backdrop-layer hero-backdrop-2" id="hero-backdrop-2"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" id="hero-content">
+            <span class="hero-badge" id="hero-badge">#1 Trending</span>
+            <h1 class="hero-title" id="hero-title">CinePulse</h1>
+            <div class="hero-meta" id="hero-meta">
+                <span class="badge-imdb" id="hero-imdb"><i class="fa-solid fa-star"></i> 8.0</span>
+                <span class="badge-year" id="hero-year"></span>
+                <span class="badge-genre" id="hero-genre"></span>
+                <a class="badge-provider" id="hero-provider" style="display:none;" target="_blank" rel="noopener noreferrer"></a>
+            </div>
+            <p class="hero-overview" id="hero-overview">Trending movies and shows across India and the world.</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" id="hero-trailer-btn"><i class="fa-solid fa-play"></i> Watch Trailer</button>
+                <button class="btn btn-secondary" id="hero-details-btn"><i class="fa-solid fa-circle-info"></i> More Info</button>
+            </div>
+        </div>
+        <div class="hero-indicators" id="hero-indicators"></div>
+    </section>
+
+    <main class="main-container" id="main-content">
+        <!-- Slim filter bar -->
+        <div class="filter-bar" id="controls-section">
+            <div class="filter-group">
+                <label class="select-wrap"><i class="fa-solid fa-film"></i>
+                    <select id="genre-filter" aria-label="Filter by genre"><option value="">All Genres</option></select>
+                </label>
+                <label class="select-wrap"><i class="fa-solid fa-globe"></i>
+                    <select id="language-filter" aria-label="Filter by language"><option value="">All Languages</option></select>
+                </label>
+                <button class="btn btn-reset" id="btn-reset-filters" title="Reset filters" aria-label="Reset filters"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+            </div>
+            <div class="filter-status-bar" id="filter-status-bar" style="display:none;">
+                <span id="filter-status-text">Showing filtered results</span>
+                <button id="clear-all-filters-link">Clear</button>
+            </div>
+        </div>
+
+        <!-- Category rows are rendered here by script.js -->
+        <div id="rows-container"></div>
+
+        <div class="no-results-box" id="no-results-box" style="display:none;">
+            <div class="no-results-icon"><i class="fa-solid fa-film"></i></div>
+            <h2>No titles found</h2>
+            <p>Try a different search, genre or language.</p>
+            <button class="btn btn-primary" id="btn-clear-empty-filter">Reset Filters</button>
+        </div>
+    </main>
+
+    <!-- Detail & trailer modal -->
+    <div class="modal-backdrop" id="movie-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-movie-title">
+        <div class="modal-dialog">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-media-header" id="modal-media-header">
+                <div class="video-container" id="modal-video-container" style="display:none;">
+                    <iframe id="modal-youtube-iframe" src="" title="Trailer player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="modal-backdrop-img" id="modal-backdrop-img"></div>
+                <div class="modal-media-overlay"></div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-title-row">
+                    <div>
+                        <h2 class="modal-movie-title" id="modal-movie-title">Title</h2>
+                        <div class="modal-badges">
+                            <span class="badge-imdb" id="modal-imdb"><i class="fa-solid fa-star"></i> 8.5</span>
+                            <span class="badge-year" id="modal-release-date"></span>
+                            <span class="badge-lang" id="modal-language"></span>
+                            <span class="badge-type" id="modal-media-type"></span>
+                        </div>
+                    </div>
+                    <div class="modal-provider-wrap" id="modal-provider-wrap" style="display:none;">
+                        <span class="provider-label">Streaming on</span>
+                        <div class="modal-provider-badges" id="modal-watch-provider"></div>
+                    </div>
+                </div>
+                <div class="modal-genres" id="modal-genres"></div>
+                <div class="modal-overview-section">
+                    <h3>Storyline</h3>
+                    <p class="modal-overview-text" id="modal-overview"></p>
+                </div>
+                <div class="modal-actions" id="modal-actions">
+                    <button class="btn btn-primary" id="modal-play-trailer-btn"><i class="fa-solid fa-play"></i> Watch Trailer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Creator & Architecture Modal -->
+    <div class="modal-backdrop" id="creator-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="creator-modal-title">
+        <div class="modal-dialog creator-modal-dialog">
+            <button class="modal-close-btn" id="creator-modal-close-btn" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="creator-modal-header">
+                <div class="creator-avatar">RK</div>
+                <div>
+                    <span class="creator-tag"><i class="fa-solid fa-crown"></i> Creator &amp; Lead Engineer</span>
+                    <h2 class="creator-name" id="creator-modal-title">Rajiv Kumar</h2>
+                    <p class="creator-subtitle">Architect of CinePulse Aggregator &amp; Data Pipeline</p>
+                </div>
+            </div>
+            <div class="creator-modal-body">
+                <div class="creator-contact-pills">
+                    <a href="mailto:rajivkumarrathore@gmail.com" class="creator-pill-link">
+                        <i class="fa-solid fa-envelope"></i> rajivkumarrathore@gmail.com
+                    </a>
+                    <a href="https://t.me/rajivkumarrathore" class="creator-pill-link telegram-pill" target="_blank" rel="noopener">
+                        <i class="fa-brands fa-telegram"></i> @rajivkumarrathore
+                    </a>
+                    <a href="https://kids-shorts-factory.vercel.app" class="creator-pill-link promo-pill" target="_blank" rel="noopener">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> KidsShortFactory
+                    </a>
+                </div>
+
+                <div class="creator-tech-section">
+                    <h3><i class="fa-solid fa-layer-group"></i> Project Architecture &amp; System Features</h3>
+                    <p>CinePulse is an automated streaming aggregator platform built to continuously discover, categorize, and showcase trending movies, TV series, and legal free full movies across major OTT platforms.</p>
+                    
+                    <div class="tech-grid">
+                        <div class="tech-card">
+                            <h4><i class="fa-brands fa-python"></i> Backend &amp; Automation</h4>
+                            <p>Python, Flask REST Framework, APScheduler 24-Hour Daemon, Async Multi-threaded Processing.</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4><i class="fa-solid fa-database"></i> Database &amp; Multi-API Engine</h4>
+                            <p>SQLite3 Database with indexing, TMDb API v3, OMDb API, YouTube Data API v3.</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4><i class="fa-solid fa-palette"></i> Modern UI Architecture</h4>
+                            <p>Vanilla CSS3 Glassmorphism System, Responsive Touch Sliders, Dynamic Spotlight Banner, Dark Charcoal Theme.</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4><i class="fa-solid fa-bolt"></i> Smart OTT Classification</h4>
+                            <p>Real-time monetization provider parsing (Free/Ads vs Paid Subscriptions), 24h background auto-sync pipeline.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="creator-actions">
+                    <a href="mailto:rajivkumarrathore@gmail.com?subject=Inquiry%20from%20CinePulse" class="btn btn-primary">
+                        <i class="fa-solid fa-paper-plane"></i> Contact Rajiv Kumar
+                    </a>
+                    <a href="https://t.me/rajivkumarrathore" target="_blank" rel="noopener" class="btn btn-secondary">
+                        <i class="fa-brands fa-telegram"></i> Telegram Chat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minimal Premium Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <a class="brand" href="/">CINE<span>PULSE</span></a>
+                <p class="footer-subtext">Designed &amp; Developed by <strong>Rajiv Kumar</strong></p>
+                <div class="footer-contacts">
+                    <a href="mailto:rajivkumarrathore@gmail.com"><i class="fa-solid fa-envelope"></i> rajivkumarrathore@gmail.com</a>
+                    <span class="dot-sep">&bull;</span>
+                    <a href="https://t.me/rajivkumarrathore" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> @rajivkumarrathore</a>
+                    <span class="dot-sep">&bull;</span>
+                    <a href="https://kids-shorts-factory.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-wand-magic-sparkles"></i> KidsShortFactory</a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <span class="footer-sync-tag"><i class="fa-solid fa-arrows-rotate"></i> <span id="footer-update-text">Auto-syncs every 24h</span></span>
+                <p class="footer-copy">&copy; CinePulse. Powered by TMDb, OMDb &amp; YouTube API.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script id="initial-data" type="application/json">{{ initial_data_json | safe }}</script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
