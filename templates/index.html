@@ -27,9 +27,14 @@
                 {% for slug, (label, path) in pages.items() %}
                 <a href="{{ path }}" class="nav-link {% if slug == active_page %}active{% endif %}" id="nav-{{ slug }}">{{ label }}</a>
                 {% endfor %}
-                <a href="https://kids-shorts-factory.vercel.app" target="_blank" rel="noopener" class="nav-link nav-promo-link" title="Visit KidsShortFactory">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> KidsShortFactory
-                </a>
+                <button type="button" class="nav-promo-btn btn-kids-promo" id="btn-open-kids-shorts" title="Kids Shorts Studio Overview &amp; Login">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Kids Shorts Studio</span>
+                </button>
+                <button type="button" class="nav-promo-btn btn-classdesk-promo" id="btn-open-classdesk" title="ClassDesk Coaching SaaS Overview &amp; Login">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>ClassDesk</span>
+                </button>
             </nav>
 
             <div class="nav-actions">
@@ -162,7 +167,10 @@
                         <i class="fa-brands fa-telegram"></i> @rajivkumarrathore
                     </a>
                     <a href="https://kids-shorts-factory.vercel.app" class="creator-pill-link promo-pill" target="_blank" rel="noopener">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> KidsShortFactory
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Kids Shorts Studio
+                    </a>
+                    <a href="https://class-desk-steel.vercel.app" class="creator-pill-link classdesk-pill" target="_blank" rel="noopener">
+                        <i class="fa-solid fa-graduation-cap"></i> ClassDesk
                     </a>
                 </div>
 
@@ -202,6 +210,203 @@
         </div>
     </div>
 
+    <!-- Kids Shorts Studio Overview Modal -->
+    <div class="modal-backdrop app-overview-backdrop" id="kids-shorts-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="kids-shorts-modal-title">
+        <div class="modal-dialog app-overview-dialog kids-shorts-dialog">
+            <button class="modal-close-btn" id="kids-shorts-close-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="app-overview-header kids-header-bg">
+                <div class="app-badge-icon kids-icon-glow">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div class="app-header-info">
+                    <div class="app-top-badges">
+                        <span class="app-tag-pill kids-pill"><i class="fa-solid fa-lock"></i> Private AI Studio</span>
+                        <span class="app-tag-subpill"><i class="fa-solid fa-shield-halved"></i> Authorized Admin Portal</span>
+                    </div>
+                    <h2 class="app-modal-title" id="kids-shorts-modal-title">Kids Shorts Studio</h2>
+                    <p class="app-modal-tagline">Autonomous AI Engine for Viral Shorts &amp; Mythological Deep Stories</p>
+                </div>
+            </div>
+
+            <div class="app-overview-body">
+                <div class="app-intro-card">
+                    <div class="intro-headline">
+                        <i class="fa-solid fa-bolt-lightning text-gold"></i>
+                        <div>
+                            <strong>What Kids Shorts Studio Powers:</strong>
+                            <p>Complete end-to-end AI automation pipeline that generates high-retention viral scripts, lifelike Indic voiceovers, cinematic visual scenes, and publishes automatically 24/7 to YouTube &amp; Meta.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-features-grid">
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap gold-icon"><i class="fa-solid fa-om"></i></div>
+                        <div class="feature-content">
+                            <h4>83+ Divine Gods</h4>
+                            <p>Smart non-repeating dynamic rotation cycle for cultural &amp; devotional storytelling.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap gold-icon"><i class="fa-solid fa-film"></i></div>
+                        <div class="feature-content">
+                            <h4>Dual Video Modes</h4>
+                            <p>Viral Shorts (30–60s) &amp; Deep Narrative Stories (60–180s) optimized for viewer retention.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap gold-icon"><i class="fa-solid fa-microphone-lines"></i></div>
+                        <div class="feature-content">
+                            <h4>Indic Neural Voice</h4>
+                            <p>Pure Devanagari Hindi AI TTS with custom emotional pacing, speed &amp; pitch controls.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap gold-icon"><i class="fa-solid fa-wand-magic"></i></div>
+                        <div class="feature-content">
+                            <h4>Flux AI &amp; Grading</h4>
+                            <p>9:16 and 16:9 ratios, animated particle overlays, atmospheric lighting &amp; color grading.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap gold-icon"><i class="fa-solid fa-closed-captioning"></i></div>
+                        <div class="feature-content">
+                            <h4>10 Caption Styles</h4>
+                            <p>Karaoke, Bold Devanagari, Highlighter, Popline, Glitch &amp; animated kinetic typography.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap gold-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <div class="feature-content">
+                            <h4>24/7 Cloud Autopilot</h4>
+                            <p>Auto-generates, renders, and publishes directly to YouTube &amp; Facebook without manual intervention.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-action-box">
+                    <div class="app-login-cta">
+                        <a href="https://kids-shorts-factory.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-google-login">
+                            <svg class="google-svg-icon" viewBox="0 0 24 24" width="20" height="20">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                            </svg>
+                            <span>Continue with Google (Portal Login)</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="app-direct-actions">
+                        <a href="https://t.me/rajivkumarrathore" target="_blank" rel="noopener noreferrer" class="btn btn-telegram-chat">
+                            <i class="fa-brands fa-telegram"></i> Chat on Telegram (@rajivkumarrathore)
+                        </a>
+                        <a href="mailto:Rajivkumarrathore5@gmail.com?subject=Kids%20Shorts%20Studio%20Access%20Request" class="btn btn-email-request">
+                            <i class="fa-solid fa-envelope"></i> Request via Email (Rajivkumarrathore5@gmail.com)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ClassDesk Overview Modal -->
+    <div class="modal-backdrop app-overview-backdrop" id="classdesk-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="classdesk-modal-title">
+        <div class="modal-dialog app-overview-dialog classdesk-dialog">
+            <button class="modal-close-btn" id="classdesk-close-btn" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="app-overview-header classdesk-header-bg">
+                <div class="app-badge-icon classdesk-icon-glow">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="app-header-info">
+                    <div class="app-top-badges">
+                        <span class="app-tag-pill classdesk-pill"><i class="fa-solid fa-chalkboard-user"></i> Coaching SaaS</span>
+                        <span class="app-tag-subpill"><i class="fa-solid fa-shield-heart"></i> Made for India</span>
+                    </div>
+                    <h2 class="app-modal-title" id="classdesk-modal-title">ClassDesk</h2>
+                    <p class="app-modal-tagline">Coaching Center &amp; Tuition Management System (class-desk.in)</p>
+                </div>
+            </div>
+
+            <div class="app-overview-body">
+                <div class="app-intro-card classdesk-intro">
+                    <div class="intro-headline">
+                        <i class="fa-solid fa-school text-emerald"></i>
+                        <div>
+                            <strong>What ClassDesk Powers:</strong>
+                            <p>An intuitive, mobile-first management platform designed specifically for Indian coaching centers, tuition classes &amp; private tutors (20–200+ students) to manage batches, track fees, and communicate with parents.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-features-grid">
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap emerald-icon"><i class="fa-solid fa-users-gear"></i></div>
+                        <div class="feature-content">
+                            <h4>Students &amp; Batches</h4>
+                            <p>Effortlessly organize students across classes, subjects, and batch schedules with instant profiles.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap emerald-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="feature-content">
+                            <h4>1-Tap Daily Attendance</h4>
+                            <p>Lightning-fast digital attendance logging with detailed monthly percentage reports.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap emerald-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                        <div class="feature-content">
+                            <h4>Fees &amp; Dues Tracker</h4>
+                            <p>Track pending fees, record digital receipts, and plug revenue leakage with automated dues logs.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap emerald-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="feature-content">
+                            <h4>Tests &amp; Marks Analytics</h4>
+                            <p>Record exam marks, analyze rank distribution, and share student progress reports.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap emerald-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="feature-content">
+                            <h4>Auto WhatsApp Updates</h4>
+                            <p>Send instant absence alerts, test scorecards, and fee notices directly to parents via WhatsApp.</p>
+                        </div>
+                    </div>
+                    <div class="app-feature-card">
+                        <div class="feature-icon-wrap emerald-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <div class="feature-content">
+                            <h4>Mobile-First &amp; Firebase</h4>
+                            <p>Built with Next.js &amp; Google Cloud Firebase (asia-south2, Delhi Region) for 99.9% uptime and low latency.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-action-box">
+                    <div class="app-login-cta">
+                        <a href="https://class-desk-steel.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-classdesk-primary">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <span>Open ClassDesk (Login / Sign Up)</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                    <div class="app-direct-actions">
+                        <a href="https://class-desk-steel.vercel.app" target="_blank" rel="noopener noreferrer" class="btn btn-classdesk-secondary">
+                            <i class="fa-solid fa-rocket"></i> Start Free Trial (Live App)
+                        </a>
+                        <a href="mailto:Rajivkumarrathore5@gmail.com?subject=ClassDesk%20Demo%20Inquiry" class="btn btn-email-request">
+                            <i class="fa-solid fa-envelope"></i> Request Center Onboarding Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Minimal Premium Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -213,7 +418,9 @@
                     <span class="dot-sep">&bull;</span>
                     <a href="https://t.me/rajivkumarrathore" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> @rajivkumarrathore</a>
                     <span class="dot-sep">&bull;</span>
-                    <a href="https://kids-shorts-factory.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-wand-magic-sparkles"></i> KidsShortFactory</a>
+                    <a href="https://kids-shorts-factory.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-wand-magic-sparkles"></i> Kids Shorts Studio</a>
+                    <span class="dot-sep">&bull;</span>
+                    <a href="https://class-desk-steel.vercel.app" target="_blank" rel="noopener"><i class="fa-solid fa-graduation-cap"></i> ClassDesk</a>
                 </div>
             </div>
             <div class="footer-right">

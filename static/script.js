@@ -569,8 +569,53 @@ document.addEventListener("DOMContentLoaded", () => {
     if (creatorModal) {
         creatorModal.addEventListener("click", (e) => { if (e.target === creatorModal) closeCreatorModal(); });
     }
+
+    // --- Kids Shorts Studio Overview Modal ---
+    const kidsShortsModal = $("kids-shorts-modal");
+    function openKidsShortsModal() {
+        if (!kidsShortsModal) return;
+        kidsShortsModal.classList.add("active");
+        kidsShortsModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+    function closeKidsShortsModal() {
+        if (!kidsShortsModal) return;
+        kidsShortsModal.classList.remove("active");
+        kidsShortsModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+    if ($("btn-open-kids-shorts")) $("btn-open-kids-shorts").addEventListener("click", openKidsShortsModal);
+    if ($("kids-shorts-close-btn")) $("kids-shorts-close-btn").addEventListener("click", closeKidsShortsModal);
+    if (kidsShortsModal) {
+        kidsShortsModal.addEventListener("click", (e) => { if (e.target === kidsShortsModal) closeKidsShortsModal(); });
+    }
+
+    // --- ClassDesk Overview Modal ---
+    const classdeskModal = $("classdesk-modal");
+    function openClassdeskModal() {
+        if (!classdeskModal) return;
+        classdeskModal.classList.add("active");
+        classdeskModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+    function closeClassdeskModal() {
+        if (!classdeskModal) return;
+        classdeskModal.classList.remove("active");
+        classdeskModal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+    if ($("btn-open-classdesk")) $("btn-open-classdesk").addEventListener("click", openClassdeskModal);
+    if ($("classdesk-close-btn")) $("classdesk-close-btn").addEventListener("click", closeClassdeskModal);
+    if (classdeskModal) {
+        classdeskModal.addEventListener("click", (e) => { if (e.target === classdeskModal) closeClassdeskModal(); });
+    }
+
     document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && creatorModal && creatorModal.classList.contains("active")) closeCreatorModal();
+        if (e.key === "Escape") {
+            if (creatorModal && creatorModal.classList.contains("active")) closeCreatorModal();
+            if (kidsShortsModal && kidsShortsModal.classList.contains("active")) closeKidsShortsModal();
+            if (classdeskModal && classdeskModal.classList.contains("active")) closeClassdeskModal();
+        }
     });
 
     // --- Init ---

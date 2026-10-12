@@ -339,16 +339,31 @@ img { display: block; max-width: 100%; }
 .modal-overview-section h3 { font-size: 1rem; margin-bottom: 6px; }
 .modal-overview-text { margin: 0 0 20px; color: #cfcfd2; }
 
-/* ---------- Creator & Promo Nav Links ---------- */
-.nav-promo-link {
-    color: var(--gold) !important; font-weight: 600 !important;
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(245, 197, 24, 0.08); padding: 4px 12px !important;
-    border-radius: 99px; border: 1px solid rgba(245, 197, 24, 0.2);
-    transition: background .2s, border-color .2s !important;
+/* ---------- Creator & Promo Nav Buttons ---------- */
+.nav-promo-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 6px 14px; border-radius: 99px;
+    font-size: .82rem; font-weight: 600; cursor: pointer;
+    border: 1px solid transparent; transition: all .2s ease;
+    white-space: nowrap; font-family: inherit; line-height: 1.2;
 }
-.nav-promo-link:hover {
-    background: rgba(245, 197, 24, 0.18) !important; border-color: var(--gold) !important;
+.btn-kids-promo {
+    background: linear-gradient(135deg, rgba(245, 197, 24, 0.12), rgba(255, 120, 0, 0.08));
+    border-color: rgba(245, 197, 24, 0.35); color: #f5c518;
+}
+.btn-kids-promo:hover {
+    background: linear-gradient(135deg, rgba(245, 197, 24, 0.24), rgba(255, 120, 0, 0.18));
+    border-color: #f5c518; color: #fff; transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(245, 197, 24, 0.22);
+}
+.btn-classdesk-promo {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.08));
+    border-color: rgba(16, 185, 129, 0.35); color: #34d399;
+}
+.btn-classdesk-promo:hover {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.24), rgba(6, 182, 212, 0.18));
+    border-color: #34d399; color: #fff; transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.22);
 }
 
 .creator-badge-btn {
@@ -398,7 +413,151 @@ img { display: block; max-width: 100%; }
 .creator-pill-link i { color: var(--red); }
 .creator-pill-link.telegram-pill i { color: #0088cc; }
 .creator-pill-link.promo-pill i { color: var(--gold); }
+.creator-pill-link.classdesk-pill i { color: #10b981; }
 .creator-pill-link:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25); }
+
+/* ---------- App Overview Modals (Kids Shorts & ClassDesk) ---------- */
+.app-overview-dialog {
+    max-width: 760px; width: 100%; border-radius: 18px;
+    overflow: hidden; background: #131316;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+}
+.kids-shorts-dialog { border-color: rgba(245, 197, 24, 0.3); }
+.classdesk-dialog { border-color: rgba(16, 185, 129, 0.3); }
+
+.app-overview-header {
+    display: flex; align-items: center; gap: 20px;
+    padding: 26px 28px 22px; position: relative;
+    border-bottom: 1px solid var(--border);
+}
+.kids-header-bg {
+    background: radial-gradient(circle at top left, rgba(245, 197, 24, 0.18), transparent 70%),
+                linear-gradient(180deg, rgba(32, 27, 16, 0.95), rgba(19, 19, 22, 1));
+}
+.classdesk-header-bg {
+    background: radial-gradient(circle at top left, rgba(16, 185, 129, 0.18), transparent 70%),
+                linear-gradient(180deg, rgba(16, 32, 25, 0.95), rgba(19, 19, 22, 1));
+}
+
+.app-badge-icon {
+    width: 62px; height: 62px; border-radius: 16px;
+    display: grid; place-items: center; font-size: 1.65rem;
+    flex-shrink: 0;
+}
+.kids-icon-glow {
+    background: linear-gradient(135deg, #f5c518 0%, #ff8c00 100%);
+    color: #121212; box-shadow: 0 6px 24px rgba(245, 197, 24, 0.35);
+}
+.classdesk-icon-glow {
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+    color: #121212; box-shadow: 0 6px 24px rgba(16, 185, 129, 0.35);
+}
+
+.app-header-info { flex: 1; }
+.app-top-badges { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.app-tag-pill {
+    font-size: .72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; padding: 3px 10px; border-radius: 99px;
+    display: inline-flex; align-items: center; gap: 6px;
+}
+.kids-pill { background: rgba(245, 197, 24, 0.15); color: #f5c518; border: 1px solid rgba(245, 197, 24, 0.35); }
+.classdesk-pill { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+.app-tag-subpill {
+    font-size: .72rem; font-weight: 600; color: #a3a3a8;
+    background: rgba(255, 255, 255, 0.06); padding: 3px 10px;
+    border-radius: 99px; border: 1px solid var(--border);
+    display: inline-flex; align-items: center; gap: 6px;
+}
+
+.app-modal-title { font-size: 1.7rem; font-weight: 800; color: #fff; margin: 0 0 3px; }
+.app-modal-tagline { font-size: .88rem; color: #b4b4b8; margin: 0; }
+
+.app-overview-body { padding: 24px 28px 28px; }
+.app-intro-card {
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(245, 197, 24, 0.22);
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+}
+.classdesk-intro { border-color: rgba(16, 185, 129, 0.25); }
+.intro-headline {
+    display: flex; gap: 14px; align-items: flex-start;
+    font-size: .88rem; line-height: 1.5; color: #cfcfd4;
+}
+.intro-headline i { font-size: 1.25rem; margin-top: 3px; flex-shrink: 0; }
+.text-gold { color: #f5c518; }
+.text-emerald { color: #34d399; }
+.intro-headline strong { display: block; font-size: .95rem; color: #fff; margin-bottom: 3px; font-weight: 700; }
+.intro-headline p { margin: 0; }
+
+.app-features-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 12px; margin-bottom: 22px;
+}
+.app-feature-card {
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 11px; padding: 13px 15px; display: flex; gap: 12px;
+    align-items: flex-start; transition: transform .2s, border-color .2s, background .2s;
+}
+.app-feature-card:hover {
+    transform: translateY(-2px); border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+}
+.feature-icon-wrap {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: grid; place-items: center; font-size: 1rem;
+    flex-shrink: 0;
+}
+.gold-icon { background: rgba(245, 197, 24, 0.12); color: #f5c518; }
+.emerald-icon { background: rgba(16, 185, 129, 0.12); color: #34d399; }
+.feature-content h4 { font-size: .88rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.feature-content p { font-size: .78rem; color: #a3a3a8; margin: 0; line-height: 1.4; }
+
+.app-action-box {
+    background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 20px;
+}
+.app-login-cta { margin-bottom: 12px; }
+.btn-google-login {
+    width: 100%; display: flex; align-items: center; justify-content: center;
+    gap: 10px; background: #ffffff; color: #1f1f1f;
+    font-weight: 700; font-size: .95rem; padding: 12px 20px;
+    border-radius: 10px; border: 0; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    transition: background .2s, transform .15s;
+}
+.btn-google-login:hover { background: #f0f2f5; transform: translateY(-1px); }
+.google-svg-icon { vertical-align: middle; flex-shrink: 0; }
+
+.btn-classdesk-primary {
+    width: 100%; display: flex; align-items: center; justify-content: center;
+    gap: 10px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff; font-weight: 700; font-size: .95rem; padding: 12px 20px;
+    border-radius: 10px; border: 0; box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+    transition: opacity .2s, transform .15s;
+}
+.btn-classdesk-primary:hover { opacity: .94; transform: translateY(-1px); }
+
+.app-direct-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-telegram-chat {
+    flex: 1; min-width: 200px;
+    background: rgba(0, 136, 204, 0.15); border: 1px solid rgba(0, 136, 204, 0.4);
+    color: #38bdf8; font-size: .84rem; font-weight: 600; padding: 10px 14px;
+    border-radius: 8px; justify-content: center;
+}
+.btn-telegram-chat:hover { background: rgba(0, 136, 204, 0.3); color: #fff; }
+.btn-email-request {
+    flex: 1; min-width: 200px;
+    background: rgba(255, 255, 255, 0.06); border: 1px solid var(--border);
+    color: #e2e8f0; font-size: .84rem; font-weight: 600; padding: 10px 14px;
+    border-radius: 8px; justify-content: center;
+}
+.btn-email-request:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.btn-classdesk-secondary {
+    flex: 1; min-width: 200px;
+    background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #34d399; font-size: .84rem; font-weight: 600; padding: 10px 14px;
+    border-radius: 8px; justify-content: center;
+}
+.btn-classdesk-secondary:hover { background: rgba(16, 185, 129, 0.25); color: #fff; }
 
 .creator-tech-section h3 {
     font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;
@@ -496,6 +655,12 @@ img { display: block; max-width: 100%; }
     .tech-grid { grid-template-columns: 1fr; }
     .creator-modal-header { padding: 20px; flex-direction: column; text-align: center; }
     .creator-contact-pills { justify-content: center; }
+    .nav-promo-btn { margin-top: 8px; padding: 10px 14px; width: 100%; justify-content: flex-start; }
+    .app-features-grid { grid-template-columns: 1fr; }
+    .app-overview-header { padding: 20px; flex-direction: column; text-align: center; }
+    .app-top-badges { justify-content: center; }
+    .app-overview-body { padding: 16px 18px 22px; }
+    .app-direct-actions { flex-direction: column; }
 }
 
 @media (hover: none) {
